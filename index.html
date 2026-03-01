@@ -536,7 +536,7 @@
                 const locArr = Array.from(ent.locations);
                 return {
                     name: ent.name,
-                    location: locArr.length > 0 ? locArr.join(' | ') : "Area Unknown",
+                    location: locArr.length > 0 ? locArr.join(' | ') : "Area Currently Unknown",
                     screenshots: Array.from(ent.screenshots).flatMap(s => s.split(',')).map(s => s.trim()),
                     loot: lootDetails,
                     coords: ent.coords,
@@ -621,7 +621,7 @@
                         </div>
                         <div class="mb-10">
                             <p class="text-[9px] font-black uppercase tracking-[0.25em] mb-5 opacity-60" style="color: var(--text-card-dim)">Last Spotted at</p>
-                            <div class="flex flex-wrap gap-3">${coordsHtml || '<span class="text-[10px] font-black opacity-20 uppercase italic tracking-widest">Unknown Location</span>'}</div>
+                            <div class="flex flex-wrap gap-3">${coordsHtml || '<span class="text-[10px] font-black opacity-20 uppercase italic tracking-widest">Coordinates Missing</span>'}</div>
                         </div>
                         <div class="flex-1 overflow-y-auto max-h-[380px] custom-scrollbar pr-3">
                             <p class="text-[9px] font-black uppercase tracking-[0.25em] mb-5 opacity-60" style="color: var(--text-card-dim)">Drops (${src.loot.length})</p>
