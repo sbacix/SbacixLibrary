@@ -215,14 +215,14 @@
                 <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] opacity-50"></i>
                 <input 
                     type="text" id="globalSearch" 
-                    placeholder="Enter signature to scan..."
+                    placeholder="Enter Item / Mob of Interest"
                     class="w-full input-base py-3.5 pl-14 pr-8 text-sm font-semibold tracking-tight outline-none"
                 >
             </div>
 
             <div class="flex items-center gap-4">
                 <button id="toggleFilters" class="btn-primary px-8 py-3.5 text-xs font-black uppercase tracking-widest flex items-center gap-3 shadow-xl shadow-[var(--accent)]/10">
-                    <i class="fas fa-sliders-h"></i> <span>Matrix</span>
+                    <i class="fas fa-sliders-h"></i> <span>Filter</span>
                 </button>
             </div>
         </div>
@@ -296,10 +296,10 @@
             <section class="space-y-4">
                 <label class="text-[10px] font-black text-[var(--text-secondary)] uppercase tracking-widest">Search Logic</label>
                 <button id="interestToggle" class="toggle-btn input-base w-full py-4 text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3">
-                    <i class="fas fa-star text-amber-500"></i> High Interest
+                    <i class="fas fa-star text-amber-500"></i> Items Of Interest
                 </button>
                 <button id="coordsToggle" class="toggle-btn input-base w-full py-4 text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3">
-                    <i class="fas fa-location-crosshairs"></i> Geolocated Only
+                    <i class="fas fa-location-crosshairs"></i> Coordinated Only
                 </button>
             </section>
 
@@ -314,11 +314,11 @@
 
             <section class="space-y-10">
                 <div>
-                    <label class="block text-[10px] font-black uppercase tracking-widest mb-4 text-[var(--status-green)]">Primary Buff</label>
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-4 text-[var(--status-green)]">Primary Stat</label>
                     <select id="posStat1" class="w-full input-base px-4 py-3 text-[11px] font-black outline-none cursor-pointer"></select>
                 </div>
                 <div>
-                    <label class="block text-[10px] font-black uppercase tracking-widest mb-4 text-[var(--status-red)]">Primary Debuff</label>
+                    <label class="block text-[10px] font-black uppercase tracking-widest mb-4 text-[var(--status-red)]">Primary Stat</label>
                     <select id="negStat1" class="w-full input-base px-4 py-3 text-[11px] font-black outline-none cursor-pointer"></select>
                 </div>
             </section>
@@ -536,7 +536,7 @@
                 const locArr = Array.from(ent.locations);
                 return {
                     name: ent.name,
-                    location: locArr.length > 0 ? locArr.join(' | ') : "Undisclosed Sector",
+                    location: locArr.length > 0 ? locArr.join(' | ') : "Location Pending",
                     screenshots: Array.from(ent.screenshots).flatMap(s => s.split(',')).map(s => s.trim()),
                     loot: lootDetails,
                     coords: ent.coords,
@@ -581,7 +581,7 @@
             const grid = document.getElementById('sourceGrid'), info = document.getElementById('resultsInfo');
             const data = filterData();
             const view = data.slice(0, 60);
-            info.textContent = data.length > 0 ? `${data.length} Strategic Sources Synced` : "Awaiting Authorization...";
+            info.textContent = data.length > 0 ? `${data.length} Items Synced` : "Awaiting Authorization...";
             if (view.length === 0) { grid.innerHTML = ""; document.getElementById('emptyState').classList.remove('hidden'); }
             else {
                 document.getElementById('emptyState').classList.add('hidden');
@@ -620,11 +620,11 @@
                             ${src.screenshots.length > 0 ? `<a href="${src.screenshots[0]}" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-[var(--accent)] text-white hover:opacity-80 transition-all shadow-lg"><i class="fas fa-camera text-sm"></i></a>` : ''}
                         </div>
                         <div class="mb-10">
-                            <p class="text-[9px] font-black uppercase tracking-[0.25em] mb-5 opacity-60" style="color: var(--text-card-dim)">Tactical Geolocation</p>
-                            <div class="flex flex-wrap gap-3">${coordsHtml || '<span class="text-[10px] font-black opacity-20 uppercase italic tracking-widest">Signal Missing</span>'}</div>
+                            <p class="text-[9px] font-black uppercase tracking-[0.25em] mb-5 opacity-60" style="color: var(--text-card-dim)">Last Spotted at</p>
+                            <div class="flex flex-wrap gap-3">${coordsHtml || '<span class="text-[10px] font-black opacity-20 uppercase italic tracking-widest">Unknown Location</span>'}</div>
                         </div>
                         <div class="flex-1 overflow-y-auto max-h-[380px] custom-scrollbar pr-3">
-                            <p class="text-[9px] font-black uppercase tracking-[0.25em] mb-5 opacity-60" style="color: var(--text-card-dim)">Linked Artifacts (${src.loot.length})</p>
+                            <p class="text-[9px] font-black uppercase tracking-[0.25em] mb-5 opacity-60" style="color: var(--text-card-dim)">Drops (${src.loot.length})</p>
                             ${lootHtml}
                         </div>
                     </div>
