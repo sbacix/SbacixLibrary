@@ -536,7 +536,7 @@
                 const locArr = Array.from(ent.locations);
                 return {
                     name: ent.name,
-                    location: locArr.length > 0 ? locArr.join(' | ') : "Location Pending",
+                    location: locArr.length > 0 ? locArr.join(' | ') : "Area Unknown",
                     screenshots: Array.from(ent.screenshots).flatMap(s => s.split(',')).map(s => s.trim()),
                     loot: lootDetails,
                     coords: ent.coords,
